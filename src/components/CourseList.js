@@ -1,8 +1,25 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import authorStore from "../stores/authorStore";
+import {loadAuthors} from "../actions/authorActions";
 
 function CourseList(props) {
+  const [authors, setAuthors] = useState(authorStore.getAuthors());
+
+  useEffect(() => {
+    authorStore.addChangeListener(onChange);
+    if (authorStore.getAuthors.length === 0) loadAuthors();
+    return () => authorStore.removeChangeListener(onChange); // cleanup on unmount
+  }, []);
+  function onChange() {
+    setAuthors(authorStore.getAuthors());
+  }
+
+  function getAuthorName(authorId) {
+    return authors.find(author => author.id === authorId).name
+  }
+
   return (
       <table className="table">
         <thead>
@@ -30,7 +47,7 @@ function CourseList(props) {
                 <td>
                   <Link to={"/course/" + course.slug}>{course.title}</Link>
                 </td>
-                <td>{course.authorId}</td>
+                <td>{getAuthorName(course.authorId)}</td>
                 <td>{course.category}</td>
               </tr>
           );
