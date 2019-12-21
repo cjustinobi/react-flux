@@ -1,10 +1,22 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import TextInput from './Common/TextInput';
 import PropTypes from 'prop-types';
 import { Route } from "react-router-dom";
 import NotFoundPage from "./NotFoundPage";
+import authorStore from "../stores/authorStore";
+import {loadAuthors} from "../actions/authorActions";
 
 function CourseForm(props) {
+  const [authors, setAuthors] = useState(authorStore.getAuthors());
+  useEffect(() => {
+    authorStore.addChangeListener(onChange);
+    if (authorStore.getAuthors.length === 0) loadAuthors();
+    return () => authorStore.removeChangeListener(onChange); // cleanup on unmount
+  }, []);
+  function onChange() {
+    setAuthors(authorStore.getAuthors());
+  }
+
   return (
       props.course ?
       <form onSubmit={props.onSubmit}>
@@ -27,9 +39,10 @@ function CourseForm(props) {
                 value={props.course.authorId || ""}
                 className="form-control"
             >
-              <option value="" />
-              <option value="1">Cory House</option>
-              <option value="2">Scott Allen</option>
+              <option>Select Author</option>
+              {authors.map(author => {
+                return <option value={author.id}>{author.name}</option>
+              })}
             </select>
           </div>
           {props.errors.authorId && (
