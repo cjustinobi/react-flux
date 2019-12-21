@@ -1,9 +1,12 @@
 import React from 'react';
 import TextInput from './Common/TextInput';
 import PropTypes from 'prop-types';
+import { Route } from "react-router-dom";
+import NotFoundPage from "./NotFoundPage";
 
 function CourseForm(props) {
   return (
+      props.course ?
       <form onSubmit={props.onSubmit}>
         <TextInput
             id="title"
@@ -44,7 +47,10 @@ function CourseForm(props) {
         />
 
         <input type="submit" value="Save" className="btn btn-primary" />
-      </form>
+      </form> :
+      <div>
+        <Route component={NotFoundPage} />
+      </div>
   );
 }
 
