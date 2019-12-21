@@ -5,6 +5,7 @@ import { Route } from "react-router-dom";
 import NotFoundPage from "./NotFoundPage";
 import authorStore from "../stores/authorStore";
 import {loadAuthors} from "../actions/authorActions";
+import SelectInput from "./Common/SelectInput";
 
 function CourseForm(props) {
   const [authors, setAuthors] = useState(authorStore.getAuthors());
@@ -30,9 +31,8 @@ function CourseForm(props) {
         />
 
         <div className="form-group">
-          <label htmlFor="author">Author</label>
           <div className="field">
-            <select
+            <SelectInput
                 id="author"
                 name="authorId"
                 onChange={props.onChange}
@@ -43,7 +43,7 @@ function CourseForm(props) {
               {authors.map(author => {
                 return <option value={author.id}>{author.name}</option>
               })}
-            </select>
+            </SelectInput>
           </div>
           {props.errors.authorId && (
               <div className="alert alert-danger">{props.errors.authorId}</div>

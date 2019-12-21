@@ -85,6 +85,14 @@
       "authorId": 1,
       "category": "Flux",
       "createdAt": 1576958663515
+    },
+    {
+      "id": 13,
+      "slug": "uyo-meyo",
+      "title": "Uyo Meyo",
+      "authorId": 3,
+      "category": "you",
+      "createdAt": 1576960877919
     }
   ],
   "authors": [
