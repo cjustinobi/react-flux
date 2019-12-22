@@ -41,7 +41,7 @@ function CourseForm(props) {
             >
               <option>Select Author</option>
               {authors.map(author => {
-                return <option value={author.id}>{author.name}</option>
+                return <option value={author.id} key={author.id}>{author.name}</option>
               })}
             </SelectInput>
           </div>

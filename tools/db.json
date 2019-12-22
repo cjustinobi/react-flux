@@ -85,14 +85,6 @@
       "authorId": 1,
       "category": "Flux",
       "createdAt": 1576958663515
-    },
-    {
-      "id": 13,
-      "slug": "uyo-meyo",
-      "title": "Uyo Meyo",
-      "authorId": 3,
-      "category": "you",
-      "createdAt": 1576960877919
     }
   ],
   "authors": [
@@ -105,8 +97,14 @@
       "name": "Scott Allen"
     },
     {
-      "id": 3,
-      "name": "Dan Wahlin"
+      "id": 4,
+      "name": "Test Author",
+      "createdAt": 1576995260876
+    },
+    {
+      "id": 8,
+      "name": "Please hello world",
+      "createdAt": 1576998059820
     }
   ]
 }
